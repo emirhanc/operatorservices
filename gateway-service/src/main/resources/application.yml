@@ -25,11 +25,11 @@ spring:
           uri: lb://purchase-order-service
           predicates:
             - Path=/v1/purchase-order/**
-        - id: core-service
-          uri: lb://core-service
-          predicates:
-            - Path=/v1/**
         - id: notification-service
           uri: lb://notification-service
           predicates:
             - Path=/v1/notifications/**
+        - id: core-service
+          uri: lb://core-service
+          predicates:
+            - Path=/v1/**
