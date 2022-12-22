@@ -3,8 +3,15 @@
 ## operatorservices
 Sample project to emulate operations of an arbitrary wireless service provider, such as registering/removing customers, adding/removing customer accounts and making/witdrawing package purchases utilizing microservice architecture and synchronous/asynchronous communication with Spring Boot and Apache Kafka respectively. 
 
-![image](https://user-images.githubusercontent.com/29688260/209225025-981a49d6-969d-484a-b4f5-0c78a241dfc3.png)
+![image](https://user-images.githubusercontent.com/29688260/209229812-939d8094-1895-418c-b29e-7c0b52b08b35.png)
 
+## TODO
+* Add simple project explanation & installation guide
+* Add Dockerfiles
+* Replace Zipkin with ELK Stack
+* Add HCP Vault integration
+* Migrate app to Spring Boot 3.0
+* Upgrade to JDK 17+
 
 ### Practices
 * RESTful API
