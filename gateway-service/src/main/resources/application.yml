@@ -1,0 +1,35 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: gateway-service
+  kafka:
+    bootstrapServers: localhost:9094
+
+  zipkin:
+    baseUrl: http://localhost:9411/
+    sender:
+      type: kafka
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: purchase-order-service
+          uri: lb://purchase-order-service
+          predicates:
+            - Path=/v1/purchase-order/**
+        - id: core-service
+          uri: lb://core-service
+          predicates:
+            - Path=/v1/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/v1/notifications/**
