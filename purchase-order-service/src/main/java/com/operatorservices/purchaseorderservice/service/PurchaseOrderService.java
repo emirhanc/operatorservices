@@ -12,6 +12,7 @@ import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 import org.springframework.kafka.requestreply.RequestReplyFuture;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 
@@ -31,9 +32,10 @@ public class PurchaseOrderService {
         logger.info("New Purchase Order has been recorded {}", purchaseOrder);
 
         ProducerRecord<String, PurchaseOrderDto> record = new ProducerRecord<>(TOPIC, purchaseOrder);
+        replyingKafkaTemplate.setSharedReplyTopic(true);
         RequestReplyFuture<String, PurchaseOrderDto, Object> future = replyingKafkaTemplate.sendAndReceive(record);
 
-        Object response = future.get().value();
+        Object response = Objects.requireNonNull(future.get()).value();
 
         if(response instanceof ExceptionDto){
 
