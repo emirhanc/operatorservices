@@ -67,6 +67,7 @@ services:
       - SPRING_CLOUD_CONSUL_HOST=consul-server
     depends_on:
       - kafka
+      - gateway-service
 
   gateway-service:
     image: gateway-service:0.0.1-SNAPSHOT
@@ -79,6 +80,7 @@ services:
       - SPRING_CLOUD_CONSUL_HOST=consul-server
     depends_on:
       - kafka
+      - consul-server
 
   purchase-order-service:
     image: purchase-order-service:0.0.1-SNAPSHOT
@@ -91,6 +93,7 @@ services:
       replicas: 2
     depends_on:
       - kafka
+      - gateway-service
 
   notification-service:
     image: notification-service:0.0.1-SNAPSHOT
@@ -103,6 +106,8 @@ services:
       - SPRING_CLOUD_CONSUL_HOST=consul-server
       - SPRING_CLOUD_CONFIG.URI = config-server:8899
     depends_on:
+      - config-service
+      - gateway-service
       - kafka
 
   config-service:
@@ -115,5 +120,6 @@ services:
       - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
       - SPRING_CLOUD_CONSUL_HOST=consul-server
     depends_on:
+      - consul-server
       - kafka
 
