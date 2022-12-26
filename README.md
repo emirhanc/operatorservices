@@ -10,7 +10,7 @@ Docker Engine and Docker CLI are needed as they are prerequisites to be able to 
 1. Starting the services from project modules and starting the already dockerized rest on docker. 
 2. Building images from modules and using docker compose to start all the services on docker. When it comes to building docker images from Spring Boot applications there's more than 2 ways to achieve it. One of them is using `mvn spring-boot:build-image` command and another one is using `docker build` command with proper Dockerfiles. 
 
-If `mvn spring-boot:build-image` command is used at a module's root, it will build an image with the module's name and with the tag "0.0.1-SNAPSHOT". After building the images with `mvn spring-boot:build-image` command, project can be started with `docker compose up` at the project root. Dockerfiles will also be added to the project. 
+If `mvn spring-boot:build-image` command is used at a module's root, it will build an image with the module's name and with the tag "0.0.1-SNAPSHOT". After building the images with `mvn spring-boot:build-image` command, project can be started with `docker compose up` at the project root. Also, Dockerfiles can be found in the respective modules. 
 
 ## Demo Tour
 Swagger can be used as the Core Service's API UI to understand the service's capabilities. A perfect flow would be as the following:
@@ -63,7 +63,7 @@ This project has a lot to discover and talk about. I am planning to write severa
 * Distributed Tracing
 * Centralized Config
 * Controller, Service Layer & DTO Patterns
-* Containerization & Dockerize
+* Containerization & Multi-stage Docker build
 * Relational Database & Many-to-Many Relationship
 
 ### Tech Stack
