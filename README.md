@@ -44,7 +44,7 @@ This project has a lot to discover and talk about. I am planning to write severa
 
 ## TODO
 * ~~*Add simple project explanation & installation guide*~~
-* Add Dockerfiles
+* ~~*Add Dockerfiles*~~
 * Replace Zipkin with the ELK Stack
 * Add HCP Vault integration
 * Migrate app to Spring Boot 3.0
