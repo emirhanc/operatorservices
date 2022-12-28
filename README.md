@@ -3,7 +3,7 @@
 ## operatorservices
 Sample project to emulate operations of an arbitrary wireless service provider, such as registering/removing customers, adding/removing customer accounts and making/witdrawing package purchases utilizing microservice architecture and synchronous/asynchronous communication with Spring Boot and Apache Kafka respectively. 
 
-![project image](https://user-images.githubusercontent.com/29688260/209450213-1a807863-9be2-4aff-a668-9682c11690c3.png)
+![image](https://user-images.githubusercontent.com/29688260/209871183-d96fe676-6831-4712-9011-18f3d3be905c.png)
 
 ## Installation
 Docker Engine and Docker CLI are needed as they are prerequisites to be able to use Docker. There are 2 convenient ways to start up the project:
@@ -16,7 +16,7 @@ If `mvn spring-boot:build-image` command is used at a module's root, it will bui
 Swagger can be used as the Core Service's API UI to understand the service's capabilities. A perfect flow would be as the following:
 1. Create a customer
 2. Create an account to the customer using the customer id
-3. Create a package as you like
+3. Create a package as you like and make sure the package is purchasable
 4. Create a purchase at the localhost:8083/v1/purchase-order endpoint using account id, like below  :
 
 ```json
@@ -25,7 +25,7 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
   "packagePrice": 0
 ```
 
-If everything done correctly, response should look like this:
+If everything was done correctly, response should look like this:
 
 ```json
 {
@@ -49,7 +49,8 @@ This project has a lot to discover and talk about. I am planning to write severa
 * Add HCP Vault integration
 * Migrate app to Spring Boot 3.0
 * Upgrade to JDK 17+
-* Bring k8s on the scene
+* Decouple core-service
+* Bring K8s on the scene
 
 ### Practices
 * RESTful API
@@ -65,6 +66,7 @@ This project has a lot to discover and talk about. I am planning to write severa
 * Controller, Service Layer & DTO Patterns
 * Containerization & Multi-stage Docker build
 * Relational Database & Many-to-Many Relationship
+* NoSQL Databases & Caching
 
 ### Tech Stack
 * Java 11
@@ -83,6 +85,7 @@ This project has a lot to discover and talk about. I am planning to write severa
 * Docker
 * Docker Compose
 * H2 Database
+* Redis
 * JUnit 5
 
 ### Tools
@@ -92,7 +95,8 @@ This project has a lot to discover and talk about. I am planning to write severa
 * MapStruct
 * Apache Maven
 * Dockerfile
+* Buildpacks
 * Open API/Swagger
 * Postman
-* Buildpacks
+
 
