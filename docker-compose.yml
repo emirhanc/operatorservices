@@ -45,6 +45,13 @@ services:
     depends_on:
       - kafka
 
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
@@ -88,10 +95,13 @@ services:
     environment:
       - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
       - SPRING_CLOUD_CONSUL_HOST=consul-server
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
     deploy:
       mode: replicated
       replicas: 2
     depends_on:
+      - redis
       - kafka
       - gateway-service
 
