@@ -11,7 +11,7 @@ public class NotificationService {
 
     private static final Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
-    @KafkaListener(topics = "notification", groupId = "group-id")
+    @KafkaListener(topics = "notification", groupId = "notification")
     public void consume(PurchaseDto purchaseDto){
         logger.info("Purchase Confirmed {}", purchaseDto);
     }
