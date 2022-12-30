@@ -3,7 +3,7 @@
 ## operatorservices
 Sample project to emulate operations of an arbitrary wireless service provider, such as registering/removing customers, adding/removing customer accounts and making/witdrawing package purchases utilizing microservice architecture and synchronous/asynchronous communication with Spring Boot and Apache Kafka respectively. 
 
-![image](https://user-images.githubusercontent.com/29688260/209871183-d96fe676-6831-4712-9011-18f3d3be905c.png)
+![image](https://user-images.githubusercontent.com/29688260/210116407-4810c58e-f8ac-4a08-bbd0-f5fcd97e8d08.png)
 
 ## Installation
 Docker Engine and Docker CLI are needed as they are prerequisites to be able to use Docker. There are 2 convenient ways to start up the project:
