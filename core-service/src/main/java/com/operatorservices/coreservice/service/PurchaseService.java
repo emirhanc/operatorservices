@@ -14,6 +14,8 @@ import com.operatorservices.coreservice.model.SubPackage;
 import com.operatorservices.coreservice.repository.PurchaseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -45,6 +47,7 @@ public class PurchaseService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+
     protected Purchase returnPurchaseById(String id) {
         return purchaseRepository.findById(id)
                 .orElseThrow(
@@ -60,9 +63,11 @@ public class PurchaseService {
             return accountBalance.subtract(BigDecimal.valueOf(packagePrice));
     }
 
+    @Cacheable(cacheNames = "purchases", sync = true)
     public PurchaseDto getPurchaseById(String purchaseId) {
         return modelDtoConverter.purchaseToPurchaseDto(returnPurchaseById(purchaseId));
     }
+
 
     public PurchaseDto createPurchase(PurchaseCreateRequestDto purchaseCreateRequestDto) {
 
@@ -100,7 +105,7 @@ public class PurchaseService {
         return purchaseDto;
     }
 
-    @KafkaListener(topics = "purchase-order", errorHandler = "orderErrorHandler", groupId = "group-id")
+    @KafkaListener(topics = "purchase-order", errorHandler = "orderErrorHandler", groupId = "listener-group")
     @SendTo
     public Object consume(PurchaseOrderDto purchaseOrderDto){
         logger.info("Received order: {}", purchaseOrderDto);
@@ -112,8 +117,7 @@ public class PurchaseService {
         return createPurchase(purchaseCreateRequest);
     }
 
-
-
+    @CacheEvict(cacheNames = "purchases")
     public void deletePurchase(String purchaseId) {
         Purchase purchase = returnPurchaseById(purchaseId);
         (Objects.requireNonNull(purchase.getAccount())).setAccountBalance(
