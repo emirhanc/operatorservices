@@ -28,6 +28,7 @@ services:
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=BROKER
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,BROKER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_NUM_PARTITIONS=2
       - KAFKA_BROKER_ID=1
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka:9093
       - ALLOW_PLAINTEXT_LISTENER=yes
@@ -52,6 +53,22 @@ services:
       - "6379:6379"
     restart: unless-stopped
 
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=pipe_of_gandalf
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer
+    ports:
+      - "8181:8080"
+    restart: unless-stopped
+
   zipkin:
     image: openzipkin/zipkin
     container_name: zipkin
@@ -70,9 +87,13 @@ services:
       - "8080:8080"
     restart: unless-stopped
     environment:
+      - SPRING_DATA_SOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATA_SOURCE_USERNAME=postgres
+      - SPRING_DATA_SOURCE_PASSWORD=pipe_of_gandalf
       - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
       - SPRING_CLOUD_CONSUL_HOST=consul-server
     depends_on:
+      - postgres
       - kafka
       - gateway-service
 
