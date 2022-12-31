@@ -41,7 +41,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public NewTopic requestTopic() {
+    public NewTopic replyTopic() {
         return new NewTopic(replyTopic, 1, (short) 1);
     }
 
