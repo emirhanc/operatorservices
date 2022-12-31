@@ -1,6 +1,7 @@
 package com.operatorservices.purchaseorderservice.config;
 
 import com.operatorservices.purchaseorderservice.dto.PurchaseOrderDto;
+import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,4 +40,18 @@ public class KafkaConfig {
         return new ReplyingKafkaTemplate<>(producerFactory, replyContainer);
     }
 
+    @Bean
+    public NewTopic requestTopic() {
+        return new NewTopic(replyTopic, 1, (short) 1);
+    }
+
+    @Bean
+    public NewTopic purchaseOrderTopic() {
+        return new NewTopic("purchase-order", 2, (short) 1);
+    }
+
+    @Bean
+    public NewTopic zipkinTopic(){
+        return new NewTopic("zipkin",1, (short) 1);
+    }
 }
