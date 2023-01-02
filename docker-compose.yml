@@ -82,16 +82,16 @@ services:
 
   core-service:
     image: core-service:0.0.1-SNAPSHOT
-    container_name: core-service
-    ports:
-      - "8080:8080"
     restart: unless-stopped
     environment:
-      - SPRING_DATA_SOURCE_URL=jdbc:postgresql://postgres:5432/postgres
-      - SPRING_DATA_SOURCE_USERNAME=postgres
-      - SPRING_DATA_SOURCE_PASSWORD=pipe_of_gandalf
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=pipe_of_gandalf
       - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
       - SPRING_CLOUD_CONSUL_HOST=consul-server
+    deploy:
+      mode: replicated
+      replicas: 2
     depends_on:
       - postgres
       - kafka
@@ -135,7 +135,7 @@ services:
     environment:
       - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
       - SPRING_CLOUD_CONSUL_HOST=consul-server
-      - SPRING_CLOUD_CONFIG.URI = config-server:8899
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-service:8899
     depends_on:
       - config-service
       - gateway-service
@@ -153,4 +153,3 @@ services:
     depends_on:
       - consul-server
       - kafka
-
