@@ -4,6 +4,9 @@
 Sample project to emulate operations of an arbitrary wireless service provider, such as registering/removing customers, adding/removing customer accounts and making/witdrawing package purchases utilizing microservice architecture and synchronous/asynchronous communication with Spring Boot and Apache Kafka respectively. 
 
 ![image](https://user-images.githubusercontent.com/29688260/210116407-4810c58e-f8ac-4a08-bbd0-f5fcd97e8d08.png)
+## Zipkin Dependency Graph
+
+![zipkin](https://user-images.githubusercontent.com/29688260/210241621-36b7de1b-d93d-42b7-90c6-4e1a9df73f5b.gif)
 
 ## Installation
 Docker Engine and Docker CLI are needed as they are prerequisites to be able to use Docker. There are 2 convenient ways to start up the project:
