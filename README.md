@@ -169,7 +169,7 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
     "creationDate": "2023-01-02T15:30:03.157718",
     "name": "Hedy",
     "surname": "Lamar",
-    "email": "hedylamar@mail.com",
+    "email": "hedylamar@fhss.com",
     "accounts": [
         {
             "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
