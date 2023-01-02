@@ -21,16 +21,16 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
 **1. Create a customer**
 ```json
     "name": "Hedy",
-    "surname": "Lamar",
-    "email": "hedylamar@fhss.com",
+    "surname": "Lamarr",
+    "email": "hedylamarr@fhss.com",
     "password": "astrongpass"
 ```
 ```json
     "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
     "creationDate": "2023-01-02T15:30:03.157718",
     "name": "Hedy",
-    "surname": "Lamar",
-    "email": "hedylamar@fhss.com",
+    "surname": "Lamarr",
+    "email": "hedylamarr@fhss.com",
     "password": "astrongpass",
     "accounts": [],
     "_links": {
@@ -57,8 +57,8 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
     "customer": {
         "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
         "name": "Hedy",
-        "surname": "Lamar",
-        "email": "hedylamar@fhss.com"
+        "surname": "Lamarr",
+        "email": "hedylamarr@fhss.com"
     },
     "tariffType": "PREMIUM",
     "accountBalance": 2000,
@@ -126,8 +126,8 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
     "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
     "creationDate": "2023-01-02T15:30:03.157718",
     "name": "Hedy",
-    "surname": "Lamar",
-    "email": "hedylamar@fhss.com",
+    "surname": "Lamarr",
+    "email": "hedylamarr@fhss.com",
     "accounts": [
         {
             "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
@@ -168,8 +168,8 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
    "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
     "creationDate": "2023-01-02T15:30:03.157718",
     "name": "Hedy",
-    "surname": "Lamar",
-    "email": "hedylamar@fhss.com",
+    "surname": "Lamarr",
+    "email": "hedylamarr@fhss.com",
     "accounts": [
         {
             "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
