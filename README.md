@@ -17,33 +17,182 @@ If `mvn spring-boot:build-image` command is used at a module's root, it will bui
 
 ## Demo Tour
 Swagger can be used as the Core Service's API UI to understand the service's capabilities. A perfect flow would be as the following:
-1. Create a customer
-2. Create an account to the customer using the customer id
-3. Create a package as you like and make sure the package is purchasable
-4. Create a purchase at the localhost:8083/v1/purchase-order endpoint using account id, like below  :
 
+**1. Create a customer**
 ```json
-  "accountId": "7e41a7af-eba8-4b79-b29b-02d58330d7c2",
-  "subPackageId": 15,
-  "packagePrice": 0
+    "name": "Hedy",
+    "surname": "Lamar",
+    "email": "hedylamar@fhss.com",
+    "password": "astrongpass"
 ```
-
-If everything was done correctly, response should look like this:
+```json
+    "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
+    "creationDate": "2023-01-02T15:30:03.157718",
+    "name": "Hedy",
+    "surname": "Lamar",
+    "email": "hedylamar@fhss.com",
+    "password": "astrongpass",
+    "accounts": [],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa"
+        },
+        "collection": {
+            "href": "http://localhost:8083/v1/customers"
+        },
+        "accounts": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa/accounts"
+        }
+    }
+```
+**2. Create an account to the customer using the customer id**
+```json
+    "customerId": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
+    "accountBalance": "2000",
+    "tariffType": "PREMIUM"
+```
+```json
+    "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
+    "creationDate": "2023-01-02T15:39:51.376369",
+    "customer": {
+        "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
+        "name": "Hedy",
+        "surname": "Lamar",
+        "email": "hedylamar@fhss.com"
+    },
+    "tariffType": "PREMIUM",
+    "accountBalance": 2000,
+    "purchases": [],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/v1/accounts/e5a3bd4f-ada4-46ec-b195-98951e76e3d7"
+        },
+        "collection": {
+            "href": "http://localhost:8083/v1/accounts"
+        },
+        "purchases": {
+            "href": "http://localhost:8083/v1/accounts/e5a3bd4f-ada4-46ec-b195-98951e76e3d7/purchases"
+        }
+    }
+```
+**3. Create a package as you like and make sure the package is purchasable**
+```json
+    "name": "New Package",
+    "packageType": "COMBO",
+    "purchasable": true,
+    "duration": 6
+```
+```json
+    "id": 130,
+    "name": "New Package",
+    "packageType": "COMBO",
+    "duration": 6,
+    "purchasable": true,
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/v1/packages/130"
+        },
+        "collection": {
+            "href": "http://localhost:8083/v1/packages"
+        },
+        "accounts": {
+            "href": "http://localhost:8083/v1/packages/130/accounts"
+        }
+    }
+```
+**4. Create a purchase at the** `localhost:8083/v1/purchase-order` **endpoint using account id, like below:**
 
 ```json
-{
-    "id": "3fc430db-b1a0-4716-85b7-d2d9c21eebb2",
-    "purchaseDate": "2022-12-24T21:05:30.798079",
+  "accountId": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
+  "subPackageId": 130,
+  "packagePrice": 86
+```
+**If everything was done correctly, response should look like this:**
+
+```json
+    "id": "e339ada8-6528-4571-916e-e6fad2e003f3",
+    "purchaseDate": "2023-01-02T15:49:19.648971",
     "subPackage": {
-        "id": 15,
-        "name": "TooCheapToMeter",
+        "id": 130,
+        "name": "New Package",
         "packageType": "COMBO",
-        "duration": 12,
+        "duration": 6,
         "purchasable": true
     }
-}
 ```
-This project has a lot to discover and talk about. I am planning to write several blog posts on it and expand the explanation here as I further progress through the tasks in the todo section.
+**5. At** `localhost:8083/v1/customers/{customerId}`, **check if everything worked as expected and purchase amount was withdrawn**
+
+```json
+    "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
+    "creationDate": "2023-01-02T15:30:03.157718",
+    "name": "Hedy",
+    "surname": "Lamar",
+    "email": "hedylamar@fhss.com",
+    "accounts": [
+        {
+            "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
+            "creationDate": "2023-01-02T15:39:51.376369",
+            "tariffType": "PREMIUM",
+            "accountBalance": 1914.00,
+            "purchases": [
+                {
+                    "id": "e339ada8-6528-4571-916e-e6fad2e003f3",
+                    "purchaseDate": "2023-01-02T15:49:19.648971",
+                    "subPackage": {
+                        "id": 130,
+                        "name": "New Package",
+                        "packageType": "COMBO",
+                        "duration": 6,
+                        "purchasable": true
+                    }
+                }
+            ]
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa"
+        },
+        "collection": {
+            "href": "http://localhost:8083/v1/customers"
+        },
+        "accounts": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa/accounts"
+        }
+    }
+```
+**6. Delete the purchase at** `localhost:8083/v1/purchases/{purchaseId}` **and confirm that status is "204 No Content"**
+
+**7. Lastly, at** `localhost:8083/v1/customers/{customerId}`**, check everyting was updated**
+```json
+   "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
+    "creationDate": "2023-01-02T15:30:03.157718",
+    "name": "Hedy",
+    "surname": "Lamar",
+    "email": "hedylamar@mail.com",
+    "accounts": [
+        {
+            "id": "e5a3bd4f-ada4-46ec-b195-98951e76e3d7",
+            "creationDate": "2023-01-02T15:39:51.376369",
+            "tariffType": "PREMIUM",
+            "accountBalance": 2000.00,
+            "purchases": []
+        }
+    ],
+    "_links": {
+        "self": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa"
+        },
+        "collection": {
+            "href": "http://localhost:8083/v1/customers"
+        },
+        "accounts": {
+            "href": "http://localhost:8083/v1/customers/23b189b7-cf7c-4b05-8b0c-5dab66cc15aa/accounts"
+        }
+    }
+```
+
+***This project has a lot to discover and talk about. I am planning to write several blog posts on it and expand the explanation here as I further progress through the tasks in the todo section.***
 
 ## TODO
 * ~~*Add simple project explanation & installation guide*~~
@@ -89,6 +238,7 @@ This project has a lot to discover and talk about. I am planning to write severa
 * Docker Compose
 * H2 Database
 * Redis
+* Hazelcast
 * JUnit 5
 
 ### Tools
