@@ -1,0 +1,26 @@
+name: Build & Test
+on: [push]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+             ref: main
+
+      - name: Install JDK
+        uses: actions/setup-java@v3
+        with:
+            distribution: 'adopt'
+            java-version: '11'
+
+      - name: Start dockerized services
+        uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "docker-compose.ci.yml"
+
+      - name: Build with Maven
+        run: |
+            cd core-service
+            mvn clean install
