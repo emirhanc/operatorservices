@@ -23,4 +23,5 @@ jobs:
       - name: Build with Maven
         run: |
             cd core-service
-            mvn clean install
+            mvn clean 
+            mvn install
