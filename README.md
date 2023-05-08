@@ -1,5 +1,5 @@
 ## **Microservices, Asynchronous Communication, Containerization & Distributed Tracing**
-
+[![Build & Test](https://github.com/emirhanc/operatorservices/actions/workflows/buildandtest.yml/badge.svg?branch=main)](https://github.com/emirhanc/operatorservices/actions/workflows/buildandtest.yml)
 ## operatorservices
 Sample project to emulate operations of an arbitrary wireless service provider, such as registering/removing customers, adding/removing customer accounts and making/witdrawing package purchases utilizing microservice architecture and synchronous/asynchronous communication with Spring Boot and Apache Kafka respectively. 
 
@@ -14,6 +14,79 @@ Docker Engine and Docker CLI are needed as they are prerequisites to be able to 
 2. Building images from modules and using docker compose to start all the services on docker. When it comes to building docker images from Spring Boot applications there's more than 2 ways to achieve it. One of them is using `mvn spring-boot:build-image` command and another one is using `docker build` command with proper Dockerfiles. 
 
 If `mvn spring-boot:build-image` command is used at a module's root, it will build an image with the module's name and with the tag "0.0.1-SNAPSHOT". After building the images with `mvn spring-boot:build-image` command, project can be started with `docker compose up` at the project root. Also, Dockerfiles can be found in the respective modules. 
+
+An example usage flow can be found in the demo tour section below.
+
+## NOTES
+***I am aware that Consul is not necessary when all the services in the same docker network. There are 2 reasons I am keeping it: 1. Testing the modules outside the docker network 2. Demo purposes.***
+
+***Known Issue:*** After migrating from 2.7.5 to 3.0.6, I had to remove Sleuth and replace it with Micrometer. It does not officially support sending traces over Kafka yet. Although I managed to make it work like Sleuth, reply traces when using replyingKafkaTemplate(see purchase-order-service) are not being sent to Kafka. 
+
+***This project has a lot to discover and talk about. I am planning to write several blog posts on it and expand the explanation here as I further progress through the tasks in the todo section.***
+
+## TODO
+* ~~*Add simple project explanation & installation guide*~~
+* ~~*Add Dockerfiles*~~
+* Replace Zipkin with the ELK Stack
+* Add HCP Vault integration
+* ~~*Upgrade to JDK 17+*~~
+* ~~*Migrate app to Spring Boot 3.0*~~ (See core-service, purchase-order-service & notification-service)
+* ~~*Decouple core-service*~~ (I am not really sure it is necessary as it is already tightly coupled)
+* Bring K8s on the scene
+
+### Practices
+* RESTful API
+* Hypermedia as the Engine of Application State (HATEOAS)
+* API Gateway & Server Side Load Balancing
+* Unit & Integration Tests
+* Input Validation
+* Custom Exceptions
+* Global Exception Handling
+* Asynchronous/Synchronous Communication between microservices 
+* Distributed Tracing
+* Centralized Config
+* Controller, Service Layer & DTO Patterns
+* Containerization & Multi-stage Docker build
+* Relational Database & Many-to-Many Relationship
+* NoSQL Databases & Distributed Cache 
+* Continuous Integration
+
+### Tech Stack
+* ~~*Java 11*~~ Java 17
+* Kotlin 1.7.20
+* JUnit 5
+* Spring Boot (2.7.5 & 3.0.6)
+* Spring Data JPA
+* Spring HATEOAS
+* Spring Cloud Config
+* Spring Cloud Consul
+* Spring Cloud Gateway
+* Spring Cloud Sleuth
+* Spring Cloud Zipkin
+* Micrometer Tracing
+* OpenZipkin Brave
+* Apache Kafka
+* Apache Kafka Raft (KRaft)
+* HashiCorp Consul
+* Docker
+* Docker Compose
+* PostgreSQL
+* Redis
+* Hazelcast
+* H2 Database
+
+### Tools
+* GitHub Actions
+* Spring Boot Actuator
+* Zipkin UI
+* Provectus UI for Apache Kafka
+* MapStruct
+* Apache Maven
+* Dockerfile
+* Buildpacks
+* Open API/Swagger
+* Postman
+* Adminer
 
 ## Demo Tour
 Swagger can be used as the Core Service's API UI to understand the service's capabilities. A perfect flow would be as the following:
@@ -163,7 +236,7 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
 ```
 **6. Delete the purchase at** `localhost:8083/v1/purchases/{purchaseId}` **and confirm that status is "204 No Content"**
 
-**7. Lastly, at** `localhost:8083/v1/customers/{customerId}`**, check everyting was updated**
+**7. Lastly, at** `localhost:8083/v1/customers/{customerId}`**, check everything was updated**
 ```json
    "id": "23b189b7-cf7c-4b05-8b0c-5dab66cc15aa",
     "creationDate": "2023-01-02T15:30:03.157718",
@@ -191,65 +264,3 @@ Swagger can be used as the Core Service's API UI to understand the service's cap
         }
     }
 ```
-
-***This project has a lot to discover and talk about. I am planning to write several blog posts on it and expand the explanation here as I further progress through the tasks in the todo section.***
-
-## TODO
-* ~~*Add simple project explanation & installation guide*~~
-* ~~*Add Dockerfiles*~~
-* Replace Zipkin with the ELK Stack
-* Add HCP Vault integration
-* Migrate app to Spring Boot 3.0
-* Upgrade to JDK 17+
-* Decouple core-service
-* Bring K8s on the scene
-
-### Practices
-* RESTful API
-* Hypermedia as the Engine of Application State (HATEOAS)
-* API Gateway & Server Side Load Balancing
-* Unit & Integration Tests
-* Input Validation
-* Custom Exceptions
-* Global Exception Handling
-* Asynchronous/Synchronous Communication between microservices 
-* Distributed Tracing
-* Centralized Config
-* Controller, Service Layer & DTO Patterns
-* Containerization & Multi-stage Docker build
-* Relational Database & Many-to-Many Relationship
-* NoSQL Databases & Caching
-
-### Tech Stack
-* Java 11
-* Kotlin 1.7.20
-* Spring Boot
-* Spring Data JPA
-* Spring HATEOAS
-* Spring Cloud Config
-* Spring Cloud Consul
-* Spring Cloud Gateway
-* Spring Cloud Sleuth
-* Spring Cloud Zipkin
-* Apache Kafka
-* Apache Kafka Raft (KRaft)
-* HashiCorp Consul
-* Docker
-* Docker Compose
-* H2 Database
-* Redis
-* Hazelcast
-* JUnit 5
-
-### Tools
-* Spring Boot Actuator
-* Zipkin UI
-* Provectus UI for Apache Kafka
-* MapStruct
-* Apache Maven
-* Dockerfile
-* Buildpacks
-* Open API/Swagger
-* Postman
-
-
