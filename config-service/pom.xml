@@ -14,7 +14,7 @@
 	<name>config-service</name>
 	<description>Configuration Server for Operator Services</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>
 	</properties>
 	<dependencies>

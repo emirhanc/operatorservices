@@ -14,7 +14,7 @@
 	<name>gateway-service</name>
 	<description>API Gateway for Operator Services</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>
 	</properties>
 	<dependencies>
