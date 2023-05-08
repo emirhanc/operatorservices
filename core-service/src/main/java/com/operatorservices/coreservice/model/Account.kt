@@ -3,7 +3,7 @@ package com.operatorservices.coreservice.model
 import org.hibernate.annotations.GenericGenerator
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 data class Account(

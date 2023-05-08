@@ -1,6 +1,6 @@
 package com.operatorservices.coreservice.model
 
-import javax.persistence.*
+import jakarta.persistence.*
 
 @Entity
 data class SubPackage(

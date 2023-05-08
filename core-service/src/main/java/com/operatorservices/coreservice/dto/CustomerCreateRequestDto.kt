@@ -1,6 +1,6 @@
 package com.operatorservices.coreservice.dto
 
-import javax.validation.constraints.*
+import jakarta.validation.constraints.*
 
 
 data class CustomerCreateRequestDto(

@@ -4,6 +4,7 @@ package com.operatorservices.purchaseorderservice.exception;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -27,7 +28,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             @NotNull MethodArgumentNotValidException exception,
             @NotNull HttpHeaders headers,
-            @NotNull HttpStatus status,
+            @NotNull HttpStatusCode status,
             @NotNull WebRequest request
     ){
         Map<String, Object> errorBody = new LinkedHashMap<>();

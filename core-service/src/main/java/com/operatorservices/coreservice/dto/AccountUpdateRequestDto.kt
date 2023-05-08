@@ -2,7 +2,7 @@ package com.operatorservices.coreservice.dto
 
 import com.operatorservices.coreservice.model.TariffType
 import java.math.BigDecimal
-import javax.validation.constraints.Min
+import jakarta.validation.constraints.Min
 
 data class AccountUpdateRequestDto(
 

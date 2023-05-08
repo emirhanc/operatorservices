@@ -3,6 +3,7 @@ package com.operatorservices.coreservice.exception;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,7 +14,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 
 @ControllerAdvice
@@ -24,7 +27,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             @NotNull MethodArgumentNotValidException exception,
             @NotNull HttpHeaders headers,
-            @NotNull HttpStatus status,
+            @NotNull HttpStatusCode status,
             @NotNull WebRequest request
     ){
         Map<String, Object> errorBody = new LinkedHashMap<>();
