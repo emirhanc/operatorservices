@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-runtime-container:jdk-11.0.17-glibc as builder
+FROM bellsoft/liberica-runtime-container:jdk-17.0.7-glibc as builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY ./src ./src
 RUN ./mvnw clean install
 
 
-FROM bellsoft/liberica-runtime-container:jre-11.0.17-glibc
+FROM bellsoft/liberica-runtime-container:jre-17.0.7-glibc
 
 WORKDIR /app
 
