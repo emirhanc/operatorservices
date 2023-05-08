@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.ConsumerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
@@ -24,8 +26,9 @@ public class KafkaConfig {
     @Bean
     public ReplyingKafkaTemplate<String, PurchaseOrderDto, Object> replyingKafkaTemplate(
       ProducerFactory<String, PurchaseOrderDto> producerFactory,
-          ConcurrentKafkaListenerContainerFactory<String, Object> listenerContainerFactory
+      ConcurrentKafkaListenerContainerFactory<String, Object> listenerContainerFactory
     ){
+
         ConcurrentMessageListenerContainer<String, Object> replyContainer
                 = listenerContainerFactory.createContainer(replyTopic);
 
@@ -37,8 +40,28 @@ public class KafkaConfig {
 
         replyContainer.getContainerProperties().setKafkaConsumerProperties(properties);
 
-        return new ReplyingKafkaTemplate<>(producerFactory, replyContainer);
+        //replyContainer.getContainerProperties().setObservationEnabled(true);
+
+        ReplyingKafkaTemplate<String, PurchaseOrderDto, Object> replyingKafkaTemplate =
+                new ReplyingKafkaTemplate<>(producerFactory, replyContainer);
+        replyingKafkaTemplate.setObservationEnabled(true);
+
+        return replyingKafkaTemplate;
     }
+
+    //Following bean does not make any difference in terms of observation as of Spring Boot 3.0.6
+/*    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
+            ConsumerFactory<String, Object> consumerFactory
+    ){
+        ConcurrentKafkaListenerContainerFactory<String, Object> concurrentKafkaListenerContainerFactory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+
+        concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory);
+        concurrentKafkaListenerContainerFactory.getContainerProperties().setObservationEnabled(true);
+
+        return concurrentKafkaListenerContainerFactory;
+    }*/
 
     @Bean
     public NewTopic replyTopic() {
