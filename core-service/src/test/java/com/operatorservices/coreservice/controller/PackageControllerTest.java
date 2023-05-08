@@ -56,7 +56,7 @@ class PackageControllerTest extends IntegrationSetup {
         SubPackage subPackage = newSubPackage(1L);
         Long packageId = packageRepository.save(subPackage).getId();
 
-        this.mockMvc.perform(get("/v1/packages/{packageId}/", packageId))
+        this.mockMvc.perform(get("/v1/packages/{packageId}", packageId))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType(MediaTypes.HAL_JSON))
                 .andExpect(jsonPath("$.id", is(Objects.requireNonNull(packageId).intValue())))
@@ -79,7 +79,7 @@ class PackageControllerTest extends IntegrationSetup {
     @Test
     void getPackageById_whenIdIsInvalid_thenReturn404andException() throws Exception {
 
-        this.mockMvc.perform(get("/v1/packages/{packageId}/", 404))
+        this.mockMvc.perform(get("/v1/packages/{packageId}", 404))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=UTF-8")))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof EntryNotFoundException))
@@ -237,7 +237,7 @@ class PackageControllerTest extends IntegrationSetup {
         Long packageId = packageRepository.save(subPackage).getId();
         PackageRequestDto packageRequestDto = newPackageRequestDto(subPackage);
 
-        this.mockMvc.perform(put("/v1/packages/{packageId}/", packageId)
+        this.mockMvc.perform(put("/v1/packages/{packageId}", packageId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(packageRequestDto)))
                 .andExpect(status().is2xxSuccessful())
@@ -272,7 +272,7 @@ class PackageControllerTest extends IntegrationSetup {
                 6
         );
 
-        this.mockMvc.perform(put("/v1/packages/{packageId}/", packageId)
+        this.mockMvc.perform(put("/v1/packages/{packageId}", packageId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(packageRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -294,7 +294,7 @@ class PackageControllerTest extends IntegrationSetup {
                 -6
         );
 
-        this.mockMvc.perform(put("/v1/packages/{packageId}/", packageId)
+        this.mockMvc.perform(put("/v1/packages/{packageId}", packageId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(packageRequestDto)))
                 .andExpect(status().isBadRequest())

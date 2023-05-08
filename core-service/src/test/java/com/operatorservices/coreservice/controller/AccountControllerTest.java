@@ -59,7 +59,7 @@ class AccountControllerTest extends IntegrationSetup {
 
         Account account = accountRepository.save(dummyAccount);
 
-        this.mockMvc.perform(get("/v1/accounts/{accountId}/", account.getId()))
+        this.mockMvc.perform(get("/v1/accounts/{accountId}", account.getId()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType(MediaTypes.HAL_JSON))
                 .andExpect(jsonPath("$.id", is(account.getId())))

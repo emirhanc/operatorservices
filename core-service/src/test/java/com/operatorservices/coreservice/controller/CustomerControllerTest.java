@@ -124,7 +124,7 @@ class CustomerControllerTest extends IntegrationSetup {
         Customer customer = newCustomer("customerId");
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isCreated())
@@ -159,7 +159,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -183,7 +183,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -207,7 +207,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -231,7 +231,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -256,7 +256,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
@@ -286,7 +286,7 @@ class CustomerControllerTest extends IntegrationSetup {
 
         CustomerCreateRequestDto customerCreateRequestDto = newCustomerCreateRequestDto(customer);
 
-        this.mockMvc.perform(post("/v1/customers/")
+        this.mockMvc.perform(post("/v1/customers")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writer().writeValueAsString(customerCreateRequestDto)))
                 .andExpect(status().isBadRequest())
