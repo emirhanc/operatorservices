@@ -18,7 +18,7 @@ If `mvn spring-boot:build-image` command is used at a module's root, it will bui
 An example usage flow can be found in the demo tour section below.
 
 ## NOTES
-***I am aware that Consul is not necessary when all the services in the same docker network. There are 2 reasons I am keeping it: 1. Testing the modules outside the docker network 2. Demo purposes.***
+***I am aware that Consul is not necessary when all the services are in the same docker network. There are 2 reasons I am keeping it: 1. Testing the modules outside the docker network 2. Demo purposes.***
 
 ***Known Issue:*** After migrating from 2.7.5 to 3.0.6, I had to remove Sleuth and replace it with Micrometer. It does not officially support sending traces over Kafka yet. Although I managed to make it work like Sleuth, reply traces when using replyingKafkaTemplate(see purchase-order-service) are not being sent to Kafka. 
 
